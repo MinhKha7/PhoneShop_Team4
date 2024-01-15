@@ -1,0 +1,10 @@
+{
+  "phones": [
+    {
+      "id": 1,
+      "name": "Iphone 13",
+      "price": 20,
+      "desc": "lorem dgoidfashn"
+    }
+  ]
+}
