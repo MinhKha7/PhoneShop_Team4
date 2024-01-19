@@ -1,3 +1,4 @@
+@use '../helper/index' as H;
 .list-product{
     display: flex;
     gap: 1.7rem;
@@ -7,6 +8,15 @@
         padding: 0.5rem 0;
         background-color: white;
         text-align: center;
+        @include H.responsive('llg'){
+            width: 31.5%;
+        }
+        @include H.responsive('lg'){
+            width: 31%;
+        }
+        @include H.responsive('md'){
+            width: 47%;
+        }
         .product-item__img{
             width: 100%;
             img{
@@ -27,6 +37,13 @@
             button{
                 width: 50%;
                 font-size: 1.6rem;
+                @include H.responsive('lg'){
+                    font-size: 1.2rem;
+                }
+                @include H.responsive('md'){
+                    font-size: 1rem;
+                }
+                
             }
         }
     }

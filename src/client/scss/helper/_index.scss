@@ -1,0 +1,20 @@
+$break-ponits:(
+    xs:2em,
+    sm:435px,
+    md:37.5em,
+    lg:62.5em,
+    llg:1500px,
+    llg2:4000px
+);
+
+@mixin responsive($size){
+    @if(map-has-key($map: $break-ponits, $key:$size )){
+        $value:map-get(
+            $map:$break-ponits,
+            $key:$size,
+        );
+        @media screen and (max-width:$value) {
+            @content;
+        }
+    }
+}

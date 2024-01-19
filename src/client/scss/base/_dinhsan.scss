@@ -1,15 +1,30 @@
+@use '../helper/index' as H;
+
 .w-80{
     width: 70%;
     margin: 0 auto;
+    @include H.responsive('llg'){
+        width: 80%;
+    }
+    @include H.responsive('lg'){
+        width: 80%;
+    }
+    @include H.responsive('md'){
+        width: 90%;
+    }
 }
 .title{
     display: flex;
     justify-content: space-between;
     background: white;
     padding: .5rem 1rem;
+    
     p{
         font-weight: bold;
         font-size: 1.7rem;
+        @include H.responsive('md'){
+            font-size: 1.2rem;
+        }
     }
     margin: 1rem 0;
 }
