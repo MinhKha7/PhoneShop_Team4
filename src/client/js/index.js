@@ -56,17 +56,18 @@ function header() {
           elt(
             "div",
             { className: "header-box-item" },
-            elt("i", { className: "fa-solid fa-cart-shopping",
-            onclick:()=>{
-              const headerCart=document.querySelector('.header-cart');
-              headerCart.classList.remove('isActive');
-             body.addEventListener('click',(e)=>{
-              if(e.target.matches('.header-cart')){
-                headerCart.classList.add('isActive');
-              }
-             })
-            }
-}),
+            elt("i", {
+              className: "fa-solid fa-cart-shopping",
+              onclick: () => {
+                const headerCart = document.querySelector(".header-cart");
+                headerCart.classList.remove("isActive");
+                body.addEventListener("click", (e) => {
+                  if (e.target.matches(".header-cart")) {
+                    headerCart.classList.add("isActive");
+                  }
+                });
+              },
+            }),
             elt("div", { className: "num-Cart" }, 0)
           )
         )
@@ -141,30 +142,35 @@ function header() {
         },
         elt(
           "i",
-          
-          { className: "fa fa-bars", id: "bars",onclick:()=>{
-            const headerBox=document.querySelector('.mobile .header-box__left');
-            console.log(headerBox);
-            headerBox.classList.remove('isOn');
 
-           body.addEventListener('click',(e)=>{
-          
-               if(e.target.matches('.mobile .header-box__left')){
-              headerBox.classList.add('isOn')
-            }
-           })
-           document.querySelector('.close').addEventListener('click',(e)=>{
-            if(e.target.parentNode.parentNode.matches('.mobile .header-box__left')){
-              e.target.parentNode.parentNode.classList.add('isOn')
-            }
-           
-          })
-         
+          {
+            className: "fa fa-bars",
+            id: "bars",
+            onclick: () => {
+              const headerBox = document.querySelector(
+                ".mobile .header-box__left"
+              );
+              console.log(headerBox);
+              headerBox.classList.remove("isOn");
+
+              body.addEventListener("click", (e) => {
+                if (e.target.matches(".mobile .header-box__left")) {
+                  headerBox.classList.add("isOn");
+                }
+              });
+              document
+                .querySelector(".close")
+                .addEventListener("click", (e) => {
+                  if (
+                    e.target.parentNode.parentNode.matches(
+                      ".mobile .header-box__left"
+                    )
+                  ) {
+                    e.target.parentNode.parentNode.classList.add("isOn");
+                  }
+                });
+            },
           }
-
-
-        },
-    
         ),
         elt(
           "nav",
@@ -195,15 +201,19 @@ function header() {
                 )
               )
             ),
-            elt('ul',undefined,    elt(
-              "li",
+            elt(
+              "ul",
               undefined,
-              elt("a", { className: "active" }, "Trang chủ")
-            ),
-            elt("li", undefined, elt("a", undefined, "Giới Thiệu")),
-            elt("li", undefined, elt("a", undefined, "Sản Phẩm")),
-            elt("li", undefined, elt("a", undefined, "Blog")),
-            elt("li", undefined, elt("a", undefined, "Liên Hệ")))
+              elt(
+                "li",
+                undefined,
+                elt("a", { className: "active" }, "Trang chủ")
+              ),
+              elt("li", undefined, elt("a", undefined, "Giới Thiệu")),
+              elt("li", undefined, elt("a", undefined, "Sản Phẩm")),
+              elt("li", undefined, elt("a", undefined, "Blog")),
+              elt("li", undefined, elt("a", undefined, "Liên Hệ"))
+            )
           )
         ),
         elt(
@@ -250,35 +260,19 @@ function layout() {
             undefined,
             elt(
               "select",
-              undefined,
-              elt("option", undefined, "Tất cả"),
-              elt("option", undefined, "Opppo"),
-              elt("option", undefined, "Iphone")
+              {id:'select',onchange:select},
+              elt("option", {value:'tat ca'}, "Tất cả"),
+              elt("option", {value:'Oppo'}, "Opppo"),
+              elt("option", {value:'Iphone'}, "Iphone")
             )
           )
         ),
         elt(
           "div",
           { className: "list-product" },
-          elt(
-            "div",
-            { className: "list-product__item" },
-            elt(
-              "div",
-              { className: "product-item__img" },
-              elt("img", {
-                src: "https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-purple-1.jpg",
-              })
-            ),
-            elt(
-              "div",
-              { className: "product-item__bottom" },
-              elt("h3", undefined, "loremasdasdasdasd"),
-              elt("p", undefined, "3.000.000d"),
-              elt("button", { className: "btn btn-primary" }, "Mua ngay")
-            )
-          )
+       
         )
+      
       )
     )
   );
@@ -357,4 +351,57 @@ function footer() {
       )
     )
   );
+}
+
+async function productList(){
+  const response=await fetch('https://65abdb4cfcd1c9dcffc726b1.mockapi.io/phone');
+  const products=await response.json();
+  renderProduct(products)
+}
+productList();
+
+function renderProduct(products) {
+  const tbody = document.querySelector(".list-product");
+
+  // Reset lại tbody trước khi render product
+  tbody.innerHTML = "";
+
+  products.forEach((product) => {
+    const tr =  elt(
+      "div",
+      { className: "list-product__item" },
+      elt(
+        "div",
+        { className: "product-item__img" },
+        elt("img", {
+          src: "https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-purple-1.jpg",
+        })
+      ),
+      elt(
+        "div",
+        { className: "product-item__bottom" },
+        elt("h3", undefined, product.tenSP),
+        elt("p", undefined, 'asd'),
+        elt("button", { className: "btn btn-primary" }, "Mua ngay")
+      )
+    )
+
+
+    tbody.append(tr);
+  });
+}
+// click
+
+async function select(e){
+  const response=await fetch('https://65abdb4cfcd1c9dcffc726b1.mockapi.io/phone');
+  const products=await response.json();
+  console.log(e.target.value);
+  let spArray=[];
+  products.filter((sp)=>{
+    if(e.target.value===sp.loaiSP){
+      spArray.push(sp)
+    }
+  })
+ renderProduct(spArray)
+  
 }
