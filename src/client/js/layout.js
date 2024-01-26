@@ -80,18 +80,7 @@ let body=document.querySelector('body');
               elt("h3", undefined, "Giỏ hàng của bạn"),
                 elt("div",{id:'cart-top'})
             ),
-            // elt(
-            //   "div",
-            //   { className: "cart-bottom" },
-              
-            //   // elt("p", undefined, elt("span", undefined, "Số lượng:"), 3),
-            //   // elt("p", undefined, elt("span", undefined, "Tổng:"), 3),
-            //   elt(
-            //     "div",
-            //     { className: "cart-buttons" },
-            //     elt("button", { className: "btn btn-primary" }, "Thanh Toán")
-            //   )
-            // )
+        
           )
         )
       ),
@@ -146,7 +135,10 @@ let body=document.querySelector('body');
               elt(
                 "div",
                 { className: "close" },
-                elt("i", { className: "fa-solid fa-xmark" })
+                elt("i", { className: "fa-solid fa-xmark",onclick:(e)=>{
+                const headerLeft=document.querySelector('.header-box__left');
+                headerLeft.classList.add('isOn');
+                } })
               ),
               elt(
                 "form",
@@ -172,7 +164,7 @@ let body=document.querySelector('body');
                 elt(
                   "li",
                   undefined,
-                  elt("a", { className: "active" }, "Trang chủ")
+                  elt("a", { className: "active" ,href:'./client.html'}, "Trang chủ")
                 ),
                 elt("li", undefined, elt("a", undefined, "Giới Thiệu")),
                 elt("li", undefined, elt("a", undefined, "Sản Phẩm")),
@@ -214,24 +206,13 @@ let body=document.querySelector('body');
             
            
           ),
-          // elt(
-          //   "div",
-          //   { className: "cart-bottom" },
-            
-          //   // elt("p", undefined, elt("span", undefined, "Số lượng:"), 3),
-          //   // elt("p", undefined, elt("span", undefined, "Tổng:"), 3),
-          //   elt(
-          //     "div",
-          //     { className: "cart-buttons" },
-          //     elt("button", { className: "btn btn-primary" }, "Thanh Toán")
-          //   )
-          // )
+   
         )
       )
     );
   }
  
-  // console.log(header());
+
   
 function footer() {
     return elt(
@@ -306,7 +287,7 @@ function footer() {
       )
     );
   }
-// hàm num
+
 
 
 const tangSL = (id) => {
@@ -327,7 +308,7 @@ const tangSL = (id) => {
     tongTotal();
   
   
-    // console.log(tang);
+  
   };
 const giamSL = (id) => {
     let cart = JSON.parse(localStorage.getItem("cart"));
@@ -347,11 +328,7 @@ const giamSL = (id) => {
      renderCart(updateCart);
      tongTotal();
      numCart();
-    // tongTotal();
-    // carTT();
-  
-  
-    // console.log(tang);
+ 
   };
   // function xoá tat ca cart
   
@@ -375,13 +352,13 @@ const giamSL = (id) => {
             "div",
             { className: "cart-list__img" },
             elt("img", {
-              src: "https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-purple-1.jpg",
+              src: sp.hinhSP,
             }),
 
           ),
           elt('div',{className:'cart-list__title'},
           elt('h3',undefined,sp.tenSP),
-          elt('p',undefined,sp.giaSP))
+          elt('p',undefined,Number(sp.giaSP).toLocaleString("vi")))
 
         ),
         elt('div',{className:"d-flex justify-content-center align-items-center"},
@@ -404,7 +381,7 @@ const giamSL = (id) => {
           })
         )),
         elt('div',{className:"d-flex justify-content-center align-items-center"},
-        elt('p',undefined,sp.soLuong*sp.giaSP),
+        elt('p',undefined,Number(sp.soLuong*sp.giaSP).toLocaleString("vi")),
         ),
         elt('div',{className:"d-flex justify-content-center align-items-center"},
           
@@ -432,12 +409,12 @@ const giamSL = (id) => {
     elt('div',{className:"cart-right-item"},
     elt('h4',{className:"text-center"},"Thông tin thanh toán"),
     elt('p',undefined,elt('span',undefined,'Số lượng:'),totalSL),
-    elt('p',undefined,elt('span',undefined,'Thành tiền:'),totalTT),
+    elt('p',undefined,elt('span',undefined,'Thành tiền:'),Number(totalTT).toLocaleString("vi")),
     elt('hr',undefined),
     elt('p',undefined,elt('span',undefined,'Khuyến mãi:'),0),
     elt('p',undefined,elt('span',undefined,'Tiền ship:'),0),
     elt('hr',undefined),
-    elt('p',undefined,elt('span',undefined,'Tổng Tiền:'),totalTT),
+    elt('p',undefined,elt('span',undefined,'Tổng Tiền:'),Number(totalTT).toLocaleString("vi")),
     elt('div',{className:'button'},elt('button',{className:"btn btn-primary",onclick:()=>thanhToan()},"Mua ngay"))
     
     )
@@ -465,14 +442,14 @@ function renderProduct(products) {
           "div",
           { className: "product-item__img" },
           elt("img", {
-            src: "https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-purple-1.jpg",
+            src: product.hinhSP,
           })
         ),
         elt(
           "div",
           { className: "product-item__bottom" },
           elt("h3", undefined, product.tenSP),
-          elt("p", undefined, product.giaSP),
+          elt("p", undefined, Number(product.giaSP).toLocaleString("vi")),
           elt(
             "button",
             {
@@ -520,7 +497,7 @@ function renderProduct(products) {
           "div",
           { className: "cart-item__img" },
           elt("img", {
-            src: "https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-purple-1.jpg",
+            src: sp.hinhSP,
           })
         ),
         elt(
@@ -549,7 +526,7 @@ function renderProduct(products) {
               })
             )
           ),
-          elt("p", undefined, sp.giaSP)
+          elt("p", undefined, Number(sp.giaSP).toLocaleString("vi"))
         )
       );
       cartTop.append(cartItem);
@@ -580,7 +557,7 @@ function renderProduct(products) {
       { className: "cart-bottom" },
   
       elt("p", undefined, elt("span", undefined, "Số lượng:"), totalSL),
-      elt("p", undefined, elt("span", undefined, "Tổng:"), totalTT),
+      elt("p", undefined, elt("span", undefined, "Tổng:"),Number(totalTT).toLocaleString("vi")),
       elt(
         "div",
         { className: "cart-buttons" },
