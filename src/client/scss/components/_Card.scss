@@ -1,0 +1,52 @@
+@use '../helper/index' as H;
+.list-product{
+    display: flex;
+    gap: 1.7rem;
+    flex-wrap: wrap;
+    .list-product__item{
+        width: 23%;
+        padding: 0.5rem 0;
+        background-color: white;
+        text-align: center;
+        @include H.responsive('llg'){
+            width: 31.5%;
+        }
+        @include H.responsive('lg'){
+            width: 31%;
+        }
+        @include H.responsive('md'){
+            width: 47%;
+        }
+        .product-item__img{
+            width: 100%;
+            img{
+                width: 100%;
+            }
+        }
+        .product-item__bottom{
+            h3{
+                font-size: 1.7rem;
+            }
+            p{
+                font-size: 1.7rem;
+                color: transparent;
+                background-clip: text;
+                -webkit-background-clip: text;
+                background-image: linear-gradient( to right,  red,  rgb(243, 75, 103)); 
+            }
+            button{
+                width: 50%;
+                font-size: 1.6rem;
+                @include H.responsive('lg'){
+                    font-size: 1.2rem;
+                }
+                @include H.responsive('md'){
+                    font-size: 1rem;
+                }
+                
+            }
+        }
+    }
+
+
+}
