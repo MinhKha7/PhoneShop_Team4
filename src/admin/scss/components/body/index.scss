@@ -1,0 +1,61 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "Poppins", sans-serif;
+}
+
+main {
+  margin-top: 2rem;
+  .card-header {
+    background-color: rgb(85, 85, 232);
+    padding: 1.5rem 1rem;
+    .btn {
+      font-size: 1.6rem;
+      text-align: left !important;
+      color: white;
+    }
+    .title {
+      font-size: 2.6rem;
+      font-weight: 600;
+      color: white;
+      padding-top: 0.4rem;
+    }
+    input {
+      font-size: 1.6rem;
+    }
+  }
+  .card-body {
+    padding: 0;
+    text-align: center;
+    thead {
+      font-size: 1.8rem;
+      font-weight: 600;
+      #SapXepGiam {
+        display: none;
+      }
+      th {
+        border: 1px solid grey;
+      }
+    }
+    tbody {
+      font-size: 1.4rem;
+      td {
+        vertical-align: middle;
+        border: 1px solid grey;
+        img {
+          width: 20rem;
+        }
+      }
+      button {
+        font-size: 1.6rem;
+      }
+    }
+  }
+}
