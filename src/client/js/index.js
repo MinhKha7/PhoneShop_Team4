@@ -1,25 +1,26 @@
 import { elt } from "./ulti.js";
-import { header,footer,renderProduct,carTT,tongTotal,numCart} from "./layout.js";
- let body = document.querySelector("body");
+import {
+  header,
+  footer,
+  renderProduct,
+  carTT,
+  tongTotal,
+  numCart,
+} from "./layout.js";
+let body = document.querySelector("body");
 body.append(header());
 body.append(layout());
-body.append(footer());  
-
-
-
-
+body.append(footer());
 
 async function productList() {
   const response = await fetch(
-  `https://65abdb4cfcd1c9dcffc726b1.mockapi.io/phone`
+    `https://65abdb4cfcd1c9dcffc726b1.mockapi.io/phone`
   );
   const products = await response.json();
-  let indexProducts=products.filter((sp,index)=>(index<12))
+  let indexProducts = products.filter((sp, index) => index < 12);
   renderProduct(indexProducts);
 }
 productList();
-
-
 
 function layout() {
   return elt(
@@ -48,8 +49,8 @@ function layout() {
             elt(
               "select",
               { id: "select", onchange: select },
-              elt("option", { value: "tat ca" }, "Tất cả"),
-              elt("option", { value: "Oppo" }, "Opppo"),
+              elt("option", { value: "" }, "Tất cả"),
+              elt("option", { value: "Oppo" }, "Oppo"),
               elt("option", { value: "Iphone" }, "Iphone")
             )
           )
@@ -61,29 +62,29 @@ function layout() {
 }
 carTT();
 
-
 async function select(e) {
-  const response = await fetch(
-    "https://65abdb4cfcd1c9dcffc726b1.mockapi.io/phone"
-  );
-  const products = await response.json();
-  console.log(e.target.value);
-  let spArray = [];
-  products.filter((sp) => {
-    if (e.target.value === sp.loaiSP) {
-      spArray.push(sp);
-    }
-  });
-  renderProduct(spArray);
+  fetch(
+    `https://65abdb4cfcd1c9dcffc726b1.mockapi.io/phone?loaiSP=${e.target.value}`
+  )
+    .then((res) => res.json())
+    .then((products) => {
+      renderProduct(products);
+    });
+
+  // const response = await fetch(
+  //   "https://65abdb4cfcd1c9dcffc726b1.mockapi.io/phone"
+  // );
+  // const products = await response.json();
+  // console.log(e.target.value);
+  // let spArray = [];
+  // products.filter((sp) => {
+  //   if (e.target.value === sp.loaiSP) {
+  //     spArray.push(sp);
+  //   }
+  // });
+  // renderProduct(spArray);
 }
 
 numCart();
 
-
 tongTotal();
-
-
-
-
-
-
