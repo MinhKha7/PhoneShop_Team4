@@ -9,7 +9,7 @@ body.append(footer());
 function cart() {
   return elt(
     "main",
-    undefined,
+    {className:'mt-6'},
     elt(
       "div",
       { className: "cart" },
@@ -36,8 +36,8 @@ function cart() {
            
             ),
             elt('div',{className:'cart-list__footer'},
-            elt('a',{href:""},'Tiếp tục mua hàng'),
-            elt('a',{href:""},'Xoá tất cả')
+            elt('a',{href:"#"},'Tiếp tục mua hàng'),
+            elt('a',{href:"#",onclick:()=>xoaAllCart()},'Xoá tất cả')
           )
         ),
         elt('div',{className:"col-lg-4 col-sm-12 cart-right"},

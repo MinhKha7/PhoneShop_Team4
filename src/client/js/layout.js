@@ -197,7 +197,8 @@ function header() {
             { className: "header-box-item", href: "./giohang.html" },
             elt("i", {
               className: "fa-solid fa-cart-shopping",
-            })
+            }),
+            elt("div", { className: "num-CartMB" }, 0)
           )
         )
       )
@@ -229,59 +230,59 @@ function footer() {
         elt(
           "div",
           { className: "footer-box__item" },
-          elt("h4", undefined, "Phone Shop"),
+          elt("h4", undefined, "Clover Phone"),
           elt(
             "p",
             undefined,
             elt("span", undefined, "Địa chỉ:"),
-            "lorem is asdasd"
+            "lorem is asdasdasdasd"
           ),
 
           elt(
             "p",
             undefined,
-            elt("span", undefined, "Địa chỉ:"),
-            "lorem is asdasd"
+            elt("span", undefined, "SĐT:"),
+            "0334491121"
           ),
           elt(
             "p",
             undefined,
-            elt("span", undefined, "Địa chỉ:"),
-            "lorem is asdasd"
+            elt("span", undefined, "SĐT2:"),
+            "0334491191"
           ),
           elt(
             "p",
             undefined,
-            elt("span", undefined, "Địa chỉ:"),
-            "lorem is asdasd"
+            elt("span", undefined, "email:"),
+            "admin123@gmail.com"
           )
         ),
         elt(
           "div",
           { className: "footer-box__item" },
-          elt("h5", undefined, "Liên quan về chúng tôi"),
-          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
-          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
-          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
-          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng"))
+          elt("h5", undefined, "CHÍNH SÁCH"),
+          elt("p", undefined, elt("span", undefined, "Chính sách bảo mật")),
+          elt("p", undefined, elt("span", undefined, "Điều khoản sử dụng")),
+          elt("p", undefined, elt("span", undefined, "Chính sách đổi trả")),
+          elt("p", undefined, elt("span", undefined, "Phương thức vận chuyển"))
         ),
         elt(
           "div",
           { className: "footer-box__item" },
-          elt("h5", undefined, "Liên quan về chúng tôi"),
-          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
-          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
-          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
-          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng"))
+          elt("h5", undefined, "HỖ TRỢ KHÁCH HÀNG"),
+          elt("p", undefined, elt("span", undefined, "Về chúng tôi")),
+          elt("p", undefined, elt("span", undefined, "Liên hệ")),
+          elt("p", undefined, elt("span", undefined, "Địa chỉ gần nhất")),
+          elt("p", undefined, elt("span", undefined, "Đào tạo & Tuyển dụng"))
         ),
         elt(
           "div",
           { className: "footer-box__item" },
-          elt("h5", undefined, "Liên quan về chúng tôi"),
-          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
-          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
-          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
-          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng"))
+          elt("h5", undefined, "THÔNG TIN CỬA HÀNG"),
+          elt("p", undefined, elt("span", undefined, "Giới thiệu")),
+          elt("p", undefined, elt("span", undefined, "Sản phẩm")),
+          elt("p", undefined, elt("span", undefined, "Blog")),
+          elt("p", undefined, elt("span", undefined, "Liên Hệ"))
         )
       )
     )
@@ -329,6 +330,13 @@ const giamSL = (id) => {
 const xoaAllCart = () => {
   let cart = [];
   localStorage.setItem("cart", JSON.stringify(cart));
+  if (document.querySelector(".cart")) {
+    pageRenderCart(cart);
+    tongPageTotal();
+  }
+  renderCart(cart);
+  tongTotal();
+  numCart();
 };
 // cart page
 function pageRenderCart(products) {
@@ -560,6 +568,7 @@ const numCart = () => {
   let cart = JSON.parse(localStorage.getItem("cart"));
   let renderNum = `${cart == undefined ? 0 : cart.length}`;
   document.querySelector(".num-Cart").innerHTML = renderNum;
+  document.querySelector(".num-CartMB").innerHTML = renderNum;
 };
 const tongTotal = () => {
   let cart = JSON.parse(localStorage.getItem("cart"));
@@ -591,9 +600,15 @@ const tongTotal = () => {
       { className: "cart-buttons" },
       elt(
         "button",
-        { className: "btn btn-primary", onclick: () => thanhToan() },
+        { className: "btn btn-danger", onclick: () => thanhToan() },
         "Thanh Toán"
-      )
+      ),
+      elt(
+        "button",
+        { className: "btn btn-primary",onclick:()=>xoaAllCart()},
+        "Xoá Tất Cả"
+      ),
+
     )
   );
 

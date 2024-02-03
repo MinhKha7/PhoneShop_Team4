@@ -1,6 +1,11 @@
 // header
 @use '../helper/index' as H;
 header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: white;
     .desktop{
       background-color: white;
       padding: 1rem 0;
@@ -111,6 +116,10 @@ header{
                 font-size: 1.7rem;
                 
             cursor: pointer;
+            i{
+                color: black;
+            }
+            .num-CartMB,
             .num-Cart{
                 position: absolute;
                 top: -0.5rem;
