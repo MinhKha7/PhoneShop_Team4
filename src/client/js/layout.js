@@ -1,197 +1,75 @@
 import { elt } from "./ulti.js";
-let body=document.querySelector('body');
+let body = document.querySelector("body");
 
- function header() {
-    return elt(
-      "header",
-      undefined,
+function header() {
+  return elt(
+    "header",
+    undefined,
+    elt(
+      "div",
+      { className: "desktop" },
       elt(
         "div",
-        { className: "desktop" },
+        {
+          className:
+            "header-box d-flex justify-content-between w-80 align-items-center",
+        },
         elt(
           "div",
-          {
-            className:
-              "header-box d-flex justify-content-between w-80 align-items-center",
-          },
+          { className: "header-box__left" },
           elt(
-            "div",
-            { className: "header-box__left" },
-            elt("p", undefined, "PhoneShop")
-          ),
+            "i",
+            { className: "fa-solid fa-clover me-4" },
+            elt("span", undefined, " Clover Phone")
+          )
+        ),
+        elt(
+          "nav",
+          { className: "header-box__bottom" },
           elt(
-            "nav",
-            { className: "header-box__bottom" },
+            "ul",
+            { className: "d-flex" },
             elt(
-              "ul",
-              { className: "d-flex" },
-              elt(
-                "li",
-                undefined,
-                elt("a", { className: "active" }, "Trang chủ")
-              ),
-              elt("li", undefined, elt("a", undefined, "Giới Thiệu")),
-              elt("li", undefined, elt("a", undefined, "Sản Phẩm")),
-              elt("li", undefined, elt("a", undefined, "Blog")),
-              elt("li", undefined, elt("a", undefined, "Liên Hệ"))
-            )
-          ),
-          elt(
-            "div",
-            { className: "header-box__right d-flex" },
-            elt(
-              "div",
-              { className: "header-box-item" },
-              elt("i", { className: "fa-regular fa-user" })
+              "li",
+              undefined,
+              elt("a", { className: "active" }, "Trang chủ")
             ),
-            elt(
-              "div",
-              { className: "header-box-item" },
-              elt("i", { className: "fa-regular fa-heart" })
-            ),
-            elt(
-              "div",
-              { className: "header-box-item" },
-              elt("i", {
-                className: "fa-solid fa-cart-shopping",
-                onclick: () => {
-                  const headerCart = document.querySelector(".header-cart");
-                  headerCart.classList.remove("isActive");
-                  body.addEventListener("click", (e) => {
-                    if (e.target.matches(".header-cart")) {
-                      headerCart.classList.add("isActive");
-                    }
-                  });
-                },
-              }),
-              elt("div", { className: "num-Cart" }, 0)
-            )
+            elt("li", undefined, elt("a", undefined, "Giới Thiệu")),
+            elt("li", undefined, elt("a", undefined, "Sản Phẩm")),
+            elt("li", undefined, elt("a", undefined, "Blog")),
+            elt("li", undefined, elt("a", undefined, "Liên Hệ"))
           )
         ),
         elt(
           "div",
-          { className: "header-cart isActive" },
+          { className: "header-box__right d-flex" },
           elt(
             "div",
-            { className: "cart-bg" },
-            elt(
-              "div",
-              { className: "cart-top" },
-              elt("h3", undefined, "Giỏ hàng của bạn"),
-                elt("div",{id:'cart-top'})
-            ),
-        
-          )
-        )
-      ),
-      // mobile
-      elt(
-        "div",
-        { className: "mobile" },
-        elt(
-          "div",
-          {
-            className:
-              "header-box d-flex justify-content-between w-80 align-items-center",
-          },
+            { className: "header-box-item" },
+            elt("i", { className: "fa-regular fa-user" })
+          ),
           elt(
-            "i",
-  
-            {
-              className: "fa fa-bars",
-              id: "bars",
+            "div",
+            { className: "header-box-item" },
+            elt("i", { className: "fa-regular fa-heart" })
+          ),
+          elt(
+            "div",
+            { className: "header-box-item" },
+            elt("i", {
+              className: "fa-solid fa-cart-shopping",
               onclick: () => {
-                const headerBox = document.querySelector(
-                  ".mobile .header-box__left"
-                );
-              
-                headerBox.classList.remove("isOn");
-  
+                const headerCart = document.querySelector(".header-cart");
+                headerCart.classList.remove("isActive");
                 body.addEventListener("click", (e) => {
-                  if (e.target.matches(".mobile .header-box__left")) {
-                    headerBox.classList.add("isOn");
+                  if (e.target.matches(".header-cart")) {
+                    headerCart.classList.add("isActive");
                   }
                 });
-                document
-                  .querySelector(".close")
-                  .addEventListener("click", (e) => {
-                    if (
-                      e.target.parentNode.parentNode.matches(
-                        ".mobile .header-box__left"
-                      )
-                    ) {
-                      e.target.parentNode.parentNode.classList.add("isOn");
-                    }
-                  });
               },
-            }
-          ),
-          elt(
-            "nav",
-            { className: "header-box__left isOn" },
-            elt(
-              "div",
-              { className: "header-bg" },
-              elt(
-                "div",
-                { className: "close" },
-                elt("i", { className: "fa-solid fa-xmark",onclick:(e)=>{
-                const headerLeft=document.querySelector('.header-box__left');
-                headerLeft.classList.add('isOn');
-                } })
-              ),
-              elt(
-                "form",
-                undefined,
-                elt("label", undefined, "Bạn đang tìm kiếm"),
-                elt(
-                  "div",
-                  { className: "group-label" },
-                  elt("input", {
-                    type: "text",
-                    placeholder: "Mời bạn tìm kiếm",
-                  }),
-                  elt(
-                    "button",
-                    undefined,
-                    elt("i", { className: "fa-solid fa-magnifying-glass" })
-                  )
-                )
-              ),
-              elt(
-                "ul",
-                undefined,
-                elt(
-                  "li",
-                  undefined,
-                  elt("a", { className: "active" ,href:'./client.html'}, "Trang chủ")
-                ),
-                elt("li", undefined, elt("a", undefined, "Giới Thiệu")),
-                elt("li", undefined, elt("a", undefined, "Sản Phẩm")),
-                elt("li", undefined, elt("a", undefined, "Blog")),
-                elt("li", undefined, elt("a", undefined, "Liên Hệ"))
-              )
-            )
-          ),
-          elt(
-            "div",
-            { className: "header-box__bottom" },
-            elt("p", undefined, "Phone Shop")
-          ),
-          elt(
-            "div",
-            { className: "header-box__right d-flex" },
-            elt(
-                "a",
-                { className: "header-box-item" ,href:'./giohang.html'},
-                elt("i", {
-                  className: "fa-solid fa-cart-shopping",
-                 
-                }),
-                
-              )
-          ),
-          
+            }),
+            elt("div", { className: "num-Cart" }, 0)
+          )
         )
       ),
       elt(
@@ -203,165 +81,284 @@ let body=document.querySelector('body');
           elt(
             "div",
             { className: "cart-top" },
-            
-           
-          ),
-   
-        )
-      )
-    );
-  }
- 
-
-  
-function footer() {
-    return elt(
-      "footer",
-      undefined,
-  
-      elt(
-        "div",
-        { className: "w-80" },
-        elt(
-          "div",
-          { className: "footer-box" },
-  
-          elt(
-            "div",
-            { className: "footer-box__item" },
-            elt("h4", undefined, "Phone Shop"),
-            elt(
-              "p",
-              undefined,
-              elt("span", undefined, "Địa chỉ:"),
-              "lorem is asdasd"
-            ),
-  
-            elt(
-              "p",
-              undefined,
-              elt("span", undefined, "Địa chỉ:"),
-              "lorem is asdasd"
-            ),
-            elt(
-              "p",
-              undefined,
-              elt("span", undefined, "Địa chỉ:"),
-              "lorem is asdasd"
-            ),
-            elt(
-              "p",
-              undefined,
-              elt("span", undefined, "Địa chỉ:"),
-              "lorem is asdasd"
-            )
-          ),
-          elt(
-            "div",
-            { className: "footer-box__item" },
-            elt("h5", undefined, "Liên quan về chúng tôi"),
-            elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
-            elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
-            elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
-            elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng"))
-          ),
-          elt(
-            "div",
-            { className: "footer-box__item" },
-            elt("h5", undefined, "Liên quan về chúng tôi"),
-            elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
-            elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
-            elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
-            elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng"))
-          ),
-          elt(
-            "div",
-            { className: "footer-box__item" },
-            elt("h5", undefined, "Liên quan về chúng tôi"),
-            elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
-            elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
-            elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
-            elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng"))
+            elt("h3", undefined, "Giỏ hàng của bạn"),
+            elt("div", { id: "cart-top" })
           )
         )
       )
-    );
-  }
-
-
-
-const tangSL = (id) => {
-    let cart = JSON.parse(localStorage.getItem("cart"));
-    let updateCart = cart.map((sp) => {
-      if (id == sp.id) {
-        sp.soLuong = sp.soLuong + 1;
-      }
-      console.log(sp);
-      return sp;
-    });
-    localStorage.setItem("cart", JSON.stringify(updateCart));
-    if(document.querySelector('.cart')){
-       pageRenderCart(updateCart); 
-       tongPageTotal()
-    }
-    renderCart(updateCart);
-    tongTotal();
-  
-  
-  
-  };
-const giamSL = (id) => {
-    let cart = JSON.parse(localStorage.getItem("cart"));
-    cart.map((sp) => {
-      if (id == sp.id) {
-        sp.soLuong = sp.soLuong - 1;
-      }
-  
-      return sp;
-    });
-    let updateCart = cart.filter((sp) => sp.soLuong > 0);
-    localStorage.setItem("cart", JSON.stringify(updateCart));
-    if(document.querySelector('.cart')){
-        pageRenderCart(updateCart); 
-        tongPageTotal()
-     }
-     renderCart(updateCart);
-     tongTotal();
-     numCart();
- 
-  };
-  // function xoá tat ca cart
-  
-  const xoaAllCart = () => {
-    let cart = [];
-    localStorage.setItem("cart", JSON.stringify(cart));
-  };
-  // cart page
-  function pageRenderCart(products) {
-    const cartTop = document.querySelector("#cart-list");
-    cartTop.innerHTML= "";
-  
-    products.forEach((sp) => {
-      const cartItem =  elt(
+    ),
+    // mobile
+    elt(
+      "div",
+      { className: "mobile" },
+      elt(
         "div",
-        { className: "cart-list__body" },
+        {
+          className:
+            "header-box d-flex justify-content-between w-80 align-items-center",
+        },
         elt(
-          "div",
-          { className: "cart-list__item" },
+          "i",
+
+          {
+            className: "fa fa-bars",
+            id: "bars",
+            onclick: () => {
+              const headerBox = document.querySelector(
+                ".mobile .header-box__left"
+              );
+
+              headerBox.classList.remove("isOn");
+
+              body.addEventListener("click", (e) => {
+                if (e.target.matches(".mobile .header-box__left")) {
+                  headerBox.classList.add("isOn");
+                }
+              });
+              document
+                .querySelector(".close")
+                .addEventListener("click", (e) => {
+                  if (
+                    e.target.parentNode.parentNode.matches(
+                      ".mobile .header-box__left"
+                    )
+                  ) {
+                    e.target.parentNode.parentNode.classList.add("isOn");
+                  }
+                });
+            },
+          }
+        ),
+        elt(
+          "nav",
+          { className: "header-box__left isOn" },
           elt(
             "div",
-            { className: "cart-list__img" },
-            elt("img", {
-              src: sp.hinhSP,
-            }),
-
-          ),
-          elt('div',{className:'cart-list__title'},
-          elt('h3',undefined,sp.tenSP),
-          elt('p',undefined,Number(sp.giaSP).toLocaleString("vi")))
-
+            { className: "header-bg" },
+            elt(
+              "div",
+              { className: "close" },
+              elt("i", {
+                className: "fa-solid fa-xmark",
+                onclick: (e) => {
+                  const headerLeft =
+                    document.querySelector(".header-box__left");
+                  headerLeft.classList.add("isOn");
+                },
+              })
+            ),
+            elt(
+              "form",
+              undefined,
+              elt("label", undefined, "Bạn đang tìm kiếm"),
+              elt(
+                "div",
+                { className: "group-label" },
+                elt("input", {
+                  type: "text",
+                  placeholder: "Mời bạn tìm kiếm",
+                }),
+                elt(
+                  "button",
+                  undefined,
+                  elt("i", { className: "fa-solid fa-magnifying-glass" })
+                )
+              )
+            ),
+            elt(
+              "ul",
+              undefined,
+              elt(
+                "li",
+                undefined,
+                elt(
+                  "a",
+                  { className: "active", href: "./client.html" },
+                  "Trang chủ"
+                )
+              ),
+              elt("li", undefined, elt("a", undefined, "Giới Thiệu")),
+              elt("li", undefined, elt("a", undefined, "Sản Phẩm")),
+              elt("li", undefined, elt("a", undefined, "Blog")),
+              elt("li", undefined, elt("a", undefined, "Liên Hệ"))
+            )
+          )
         ),
-        elt('div',{className:"d-flex justify-content-center align-items-center"},
+        elt(
+          "div",
+          { className: "header-box__bottom" },
+          elt("p", undefined, "Phone Shop")
+        ),
+        elt(
+          "div",
+          { className: "header-box__right d-flex" },
+          elt(
+            "a",
+            { className: "header-box-item", href: "./giohang.html" },
+            elt("i", {
+              className: "fa-solid fa-cart-shopping",
+            })
+          )
+        )
+      )
+    ),
+    elt(
+      "div",
+      { className: "header-cart isActive" },
+      elt(
+        "div",
+        { className: "cart-bg" },
+        elt("div", { className: "cart-top" })
+      )
+    )
+  );
+}
+
+function footer() {
+  return elt(
+    "footer",
+    undefined,
+
+    elt(
+      "div",
+      { className: "w-80" },
+      elt(
+        "div",
+        { className: "footer-box" },
+
+        elt(
+          "div",
+          { className: "footer-box__item" },
+          elt("h4", undefined, "Phone Shop"),
+          elt(
+            "p",
+            undefined,
+            elt("span", undefined, "Địa chỉ:"),
+            "lorem is asdasd"
+          ),
+
+          elt(
+            "p",
+            undefined,
+            elt("span", undefined, "Địa chỉ:"),
+            "lorem is asdasd"
+          ),
+          elt(
+            "p",
+            undefined,
+            elt("span", undefined, "Địa chỉ:"),
+            "lorem is asdasd"
+          ),
+          elt(
+            "p",
+            undefined,
+            elt("span", undefined, "Địa chỉ:"),
+            "lorem is asdasd"
+          )
+        ),
+        elt(
+          "div",
+          { className: "footer-box__item" },
+          elt("h5", undefined, "Liên quan về chúng tôi"),
+          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
+          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
+          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
+          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng"))
+        ),
+        elt(
+          "div",
+          { className: "footer-box__item" },
+          elt("h5", undefined, "Liên quan về chúng tôi"),
+          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
+          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
+          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
+          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng"))
+        ),
+        elt(
+          "div",
+          { className: "footer-box__item" },
+          elt("h5", undefined, "Liên quan về chúng tôi"),
+          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
+          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
+          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng")),
+          elt("p", undefined, elt("span", undefined, "Hệ thống cửa hàng"))
+        )
+      )
+    )
+  );
+}
+
+const tangSL = (id) => {
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  let updateCart = cart.map((sp) => {
+    if (id == sp.id) {
+      sp.soLuong = sp.soLuong + 1;
+    }
+    console.log(sp);
+    return sp;
+  });
+  localStorage.setItem("cart", JSON.stringify(updateCart));
+  if (document.querySelector(".cart")) {
+    pageRenderCart(updateCart);
+    tongPageTotal();
+  }
+  renderCart(updateCart);
+  tongTotal();
+};
+const giamSL = (id) => {
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  cart.map((sp) => {
+    if (id == sp.id) {
+      sp.soLuong = sp.soLuong - 1;
+    }
+
+    return sp;
+  });
+  let updateCart = cart.filter((sp) => sp.soLuong > 0);
+  localStorage.setItem("cart", JSON.stringify(updateCart));
+  if (document.querySelector(".cart")) {
+    pageRenderCart(updateCart);
+    tongPageTotal();
+  }
+  renderCart(updateCart);
+  tongTotal();
+  numCart();
+};
+// function xoá tat ca cart
+
+const xoaAllCart = () => {
+  let cart = [];
+  localStorage.setItem("cart", JSON.stringify(cart));
+};
+// cart page
+function pageRenderCart(products) {
+  const cartTop = document.querySelector("#cart-list");
+  cartTop.innerHTML = "";
+
+  products.forEach((sp) => {
+    const cartItem = elt(
+      "div",
+      { className: "cart-list__body" },
+      elt(
+        "div",
+        { className: "cart-list__item" },
+        elt(
+          "div",
+          { className: "cart-list__img" },
+          elt("img", {
+            src: sp.hinhSP,
+          })
+        ),
+        elt(
+          "div",
+          { className: "cart-list__title" },
+          elt("h3", undefined, sp.tenSP),
+          elt("p", undefined, Number(sp.giaSP).toLocaleString("vi"))
+        )
+      ),
+      elt(
+        "div",
+        { className: "d-flex justify-content-center align-items-center" },
         elt(
           "div",
           { className: "minus" },
@@ -371,7 +368,7 @@ const giamSL = (id) => {
             onclick: () => giamSL(sp.id),
           })
         ),
-        elt("div", { className: "num" },sp.soLuong),
+        elt("div", { className: "num" }, sp.soLuong),
         elt(
           "div",
           { className: "plus" },
@@ -379,211 +376,242 @@ const giamSL = (id) => {
             className: "fa-solid fa-plus",
             onclick: () => tangSL(sp.id),
           })
-        )),
-        elt('div',{className:"d-flex justify-content-center align-items-center"},
-        elt('p',undefined,Number(sp.soLuong*sp.giaSP).toLocaleString("vi")),
-        ),
-        elt('div',{className:"d-flex justify-content-center align-items-center"},
-          
-        elt('i',{className:'fa-solid fa-trash',onclick:()=>xoaIcon(sp.id)})
         )
-      );
-      cartTop.append(cartItem);
-    });
+      ),
+      elt(
+        "div",
+        { className: "d-flex justify-content-center align-items-center" },
+        elt("p", undefined, Number(sp.soLuong * sp.giaSP).toLocaleString("vi"))
+      ),
+      elt(
+        "div",
+        { className: "d-flex justify-content-center align-items-center" },
+
+        elt("i", {
+          className: "fa-solid fa-trash",
+          onclick: () => xoaIcon(sp.id),
+        })
+      )
+    );
+    cartTop.append(cartItem);
+  });
+}
+const tongPageTotal = () => {
+  let cart = JSON.parse(localStorage.getItem("cart"));
+
+  let totalSL = 0;
+  let totalTT = 0;
+
+  cart.forEach((sp) => {
+    totalSL = totalSL + sp.soLuong;
+    totalTT = totalTT + sp.soLuong * sp.giaSP;
+  });
+  let cartBottom = document.querySelector(".cart-right-item");
+  if (cartBottom) {
+    cartBottom.remove();
   }
-  const tongPageTotal = () => {
-    let cart = JSON.parse(localStorage.getItem("cart"));
-  
-    let totalSL = 0;
-    let totalTT = 0;
-  
-    cart.forEach((sp) => {
-      totalSL = totalSL + sp.soLuong;
-      totalTT = totalTT + sp.soLuong * sp.giaSP;
-    });
-    let cartBottom = document.querySelector(".cart-right-item");
-    if (cartBottom) {
-      cartBottom.remove();
-    }
-    let renderTotal = 
-    elt('div',{className:"cart-right-item"},
-    elt('h4',{className:"text-center"},"Thông tin thanh toán"),
-    elt('p',undefined,elt('span',undefined,'Số lượng:'),totalSL),
-    elt('p',undefined,elt('span',undefined,'Thành tiền:'),Number(totalTT).toLocaleString("vi")),
-    elt('hr',undefined),
-    elt('p',undefined,elt('span',undefined,'Khuyến mãi:'),0),
-    elt('p',undefined,elt('span',undefined,'Tiền ship:'),0),
-    elt('hr',undefined),
-    elt('p',undefined,elt('span',undefined,'Tổng Tiền:'),Number(totalTT).toLocaleString("vi")),
-    elt('div',{className:'button'},elt('button',{className:"btn btn-primary",onclick:()=>thanhToan()},"Mua ngay"))
-    
+  let renderTotal = elt(
+    "div",
+    { className: "cart-right-item" },
+    elt("h4", { className: "text-center" }, "Thông tin thanh toán"),
+    elt("p", undefined, elt("span", undefined, "Số lượng:"), totalSL),
+    elt(
+      "p",
+      undefined,
+      elt("span", undefined, "Thành tiền:"),
+      Number(totalTT).toLocaleString("vi")
+    ),
+    elt("hr", undefined),
+    elt("p", undefined, elt("span", undefined, "Khuyến mãi:"), 0),
+    elt("p", undefined, elt("span", undefined, "Tiền ship:"), 0),
+    elt("hr", undefined),
+    elt(
+      "p",
+      undefined,
+      elt("span", undefined, "Tổng Tiền:"),
+      Number(totalTT).toLocaleString("vi")
+    ),
+    elt(
+      "div",
+      { className: "button" },
+      elt(
+        "button",
+        { className: "btn btn-primary", onclick: () => thanhToan() },
+        "Mua ngay"
+      )
     )
-  
-    document.querySelector(".cart-right__box").append(renderTotal);
-  };
+  );
+
+  document.querySelector(".cart-right__box").append(renderTotal);
+};
 
 //   render product
 const carTT = () => {
-    let cart = JSON.parse(localStorage.getItem("cart"));
-    console.log(cart);
-    renderCart(cart);
-  };
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  console.log(cart);
+  renderCart(cart);
+};
 function renderProduct(products) {
-    const tbody = document.querySelector(".list-product");
-  
-    // Reset lại tbody trước khi render product
-    tbody.innerHTML = "";
-  
-    products.forEach((product) => {
-      const tr = elt(
-        "div",
-        { className: "list-product__item" },
-        elt(
-          "div",
-          { className: "product-item__img" },
-          elt("img", {
-            src: product.hinhSP,
-          })
-        ),
-        elt(
-          "div",
-          { className: "product-item__bottom" },
-          elt("h3", undefined, product.tenSP),
-          elt("p", undefined, Number(product.giaSP).toLocaleString("vi")),
-          elt(
-            "button",
-            {
-              className: "btn btn-primary",
-              onclick: async () => {
-                const response = await fetch(
-                  `https://65abdb4cfcd1c9dcffc726b1.mockapi.io/phone/${product.id}`
-                );
-                const productInfo = await response.json();
-                console.log(productInfo);
-  
-                if (productInfo == null) return 0;
-  
-                productInfo["soLuong"] = 1;
-                console.log(productInfo["soLuong"]);
-                let cart_local = localStorage.getItem("cart");
-                let cart = cart_local == null ? [] : JSON.parse(cart_local);
-                let index = cart.findIndex((sp) => sp.id == productInfo.id);
-                if (index >= 0) cart[index]["soLuong"] += 1;
-                else cart.push(productInfo);
-                localStorage.setItem("cart", JSON.stringify(cart));
-                carTT();
-                numCart();
-                tongTotal();
-              },
-            },
-            "Mua ngay"
-          )
-        )
-      );
-  
-      tbody.append(tr);
-    });
-  }
-  // cart header
-  function renderCart(products) {
-    const cartTop = document.querySelector("#cart-top");
-    cartTop.innerHTML = "";
-  
-    products.forEach((sp) => {
-      const cartItem = elt(
-        "div",
-        { className: "cart-item" },
-        elt(
-          "div",
-          { className: "cart-item__img" },
-          elt("img", {
-            src: sp.hinhSP,
-          })
-        ),
-        elt(
-          "div",
-          { className: "cart-item__title" },
-          elt("h4", undefined, sp.tenSP),
-          elt(
-            "div",
-            { className: "d-flex" },
-            elt(
-              "div",
-              { className: "minus" },
-  
-              elt("i", {
-                className: "fa-solid fa-minus",
-                onclick: () => giamSL(sp.id),
-              })
-            ),
-            elt("div", { className: "num" }, sp.soLuong),
-            elt(
-              "div",
-              { className: "plus" },
-              elt("i", {
-                className: "fa-solid fa-plus",
-                onclick: () => tangSL(sp.id),
-              })
-            )
-          ),
-          elt("p", undefined, Number(sp.giaSP).toLocaleString("vi"))
-        )
-      );
-      cartTop.append(cartItem);
-    });
-  }
+  const tbody = document.querySelector(".list-product");
 
-  const numCart = () => {
-    let cart = JSON.parse(localStorage.getItem("cart"));
-    let renderNum = `${cart == undefined ? 0 : cart.length}`;
-    document.querySelector(".num-Cart").innerHTML = renderNum;
-  };
-  const tongTotal = () => {
-    let cart = JSON.parse(localStorage.getItem("cart"));
-  
-    let totalSL = 0;
-    let totalTT = 0;
-  
-    cart.forEach((sp) => {
-      totalSL = totalSL + sp.soLuong;
-      totalTT = totalTT + sp.soLuong * sp.giaSP;
-    });
-    let cartBottom = document.querySelector(".cart-bottom");
-    if (cartBottom) {
-      cartBottom.remove();
-    }
-    let renderTotal = elt(
+  // Reset lại tbody trước khi render product
+  tbody.innerHTML = "";
+
+  products.forEach((product) => {
+    const tr = elt(
       "div",
-      { className: "cart-bottom" },
-  
-      elt("p", undefined, elt("span", undefined, "Số lượng:"), totalSL),
-      elt("p", undefined, elt("span", undefined, "Tổng:"),Number(totalTT).toLocaleString("vi")),
+      { className: "list-product__item" },
       elt(
         "div",
-        { className: "cart-buttons" },
+        { className: "product-item__img" },
+        elt("img", {
+          src: product.hinhSP,
+        })
+      ),
+      elt(
+        "div",
+        { className: "product-item__bottom" },
+        elt("h3", undefined, product.tenSP),
+        elt("p", undefined, Number(product.giaSP).toLocaleString("vi")),
         elt(
           "button",
-          { className: "btn btn-primary", onclick: () => thanhToan() },
-          "Thanh Toán"
+          {
+            className: "btn btn-primary",
+            onclick: async () => {
+              const response = await fetch(
+                `https://65abdb4cfcd1c9dcffc726b1.mockapi.io/phone/${product.id}`
+              );
+              const productInfo = await response.json();
+              console.log(productInfo);
+
+              if (productInfo == null) return 0;
+
+              productInfo["soLuong"] = 1;
+              console.log(productInfo["soLuong"]);
+              let cart_local = localStorage.getItem("cart");
+              let cart = cart_local == null ? [] : JSON.parse(cart_local);
+              let index = cart.findIndex((sp) => sp.id == productInfo.id);
+              if (index >= 0) cart[index]["soLuong"] += 1;
+              else cart.push(productInfo);
+              localStorage.setItem("cart", JSON.stringify(cart));
+              carTT();
+              numCart();
+              tongTotal();
+            },
+          },
+          "Mua ngay"
         )
       )
     );
-  
-    document.querySelector(".cart-bg").append(renderTotal);
-  };
-  const xoaIcon=(id)=>{
-    let cart = JSON.parse(localStorage.getItem("cart"));
-    let updateCart=cart.filter((sp)=>!(sp.id==id));
-    localStorage.setItem("cart", JSON.stringify(updateCart));
 
-    if(document.querySelector('.cart')){
-        pageRenderCart(updateCart); 
-        tongPageTotal()
-     }
+    tbody.append(tr);
+  });
+}
+// cart header
+function renderCart(products) {
+  const cartTop = document.querySelector("#cart-top");
+  cartTop.innerHTML = "";
+
+  products.forEach((sp) => {
+    const cartItem = elt(
+      "div",
+      { className: "cart-item" },
+      elt(
+        "div",
+        { className: "cart-item__img" },
+        elt("img", {
+          src: sp.hinhSP,
+        })
+      ),
+      elt(
+        "div",
+        { className: "cart-item__title" },
+        elt("h4", undefined, sp.tenSP),
+        elt(
+          "div",
+          { className: "d-flex" },
+          elt(
+            "div",
+            { className: "minus" },
+
+            elt("i", {
+              className: "fa-solid fa-minus",
+              onclick: () => giamSL(sp.id),
+            })
+          ),
+          elt("div", { className: "num" }, sp.soLuong),
+          elt(
+            "div",
+            { className: "plus" },
+            elt("i", {
+              className: "fa-solid fa-plus",
+              onclick: () => tangSL(sp.id),
+            })
+          )
+        ),
+        elt("p", undefined, Number(sp.giaSP).toLocaleString("vi"))
+      )
+    );
+    cartTop.append(cartItem);
+  });
+}
+
+const numCart = () => {
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  let renderNum = `${cart == undefined ? 0 : cart.length}`;
+  document.querySelector(".num-Cart").innerHTML = renderNum;
+};
+const tongTotal = () => {
+  let cart = JSON.parse(localStorage.getItem("cart"));
+
+  let totalSL = 0;
+  let totalTT = 0;
+
+  cart.forEach((sp) => {
+    totalSL = totalSL + sp.soLuong;
+    totalTT = totalTT + sp.soLuong * sp.giaSP;
+  });
+  let cartBottom = document.querySelector(".cart-bottom");
+  if (cartBottom) {
+    cartBottom.remove();
   }
-  // thanh toan
+  let renderTotal = elt(
+    "div",
+    { className: "cart-bottom" },
+
+    elt("p", undefined, elt("span", undefined, "Số lượng:"), totalSL),
+    elt(
+      "p",
+      undefined,
+      elt("span", undefined, "Tổng:"),
+      Number(totalTT).toLocaleString("vi")
+    ),
+    elt(
+      "div",
+      { className: "cart-buttons" },
+      elt(
+        "button",
+        { className: "btn btn-primary", onclick: () => thanhToan() },
+        "Thanh Toán"
+      )
+    )
+  );
+
+  document.querySelector(".cart-bg").append(renderTotal);
+};
+const xoaIcon = (id) => {
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  let updateCart = cart.filter((sp) => !(sp.id == id));
+  localStorage.setItem("cart", JSON.stringify(updateCart));
+
+  if (document.querySelector(".cart")) {
+    pageRenderCart(updateCart);
+    tongPageTotal();
+  }
+};
+// thanh toan
 const renderModal = (trangThai) => {
-    const renderModal = `<div class="popup ${trangThai}">
+  const renderModal = `<div class="popup ${trangThai}">
     <div class="popup-bg">
       <div class="popup-box">
         
@@ -602,16 +630,29 @@ const renderModal = (trangThai) => {
       </div>
     </div>
     </div>`;
-    document.querySelector("body").innerHTML += renderModal;
-  };
-  const thanhToan = () => {
+  document.querySelector("body").innerHTML += renderModal;
+};
+const thanhToan = () => {
+  setTimeout(() => {
+    renderModal("");
     setTimeout(() => {
-      renderModal("");
-      setTimeout(() => {
-        xoaAllCart();
-        document.location = `client.html`;
-      }, 2000);
-    }, 1000);
-  };
-  
-  export {header,footer,tangSL,giamSL,xoaAllCart,pageRenderCart,tongPageTotal,renderCart,tongTotal,numCart,renderProduct,carTT}
+      xoaAllCart();
+      document.location = `client.html`;
+    }, 2000);
+  }, 1000);
+};
+
+export {
+  header,
+  footer,
+  tangSL,
+  giamSL,
+  xoaAllCart,
+  pageRenderCart,
+  tongPageTotal,
+  renderCart,
+  tongTotal,
+  numCart,
+  renderProduct,
+  carTT,
+};
