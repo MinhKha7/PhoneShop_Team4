@@ -85,9 +85,7 @@ function renderTable(products) {
               // Render dữ liệu cũ
               document.getElementById("tenSP").value = product.tenSP;
               document.getElementById("loaiSP").value = product.loaiSP;
-              document.getElementById("giaSP").value = Number(
-                product.giaSP
-              ).toLocaleString("vi");
+              document.getElementById("giaSP").value = product.giaSP;
               document.getElementById("kichThuocSP").value =
                 product.kichThuocSP;
               document.getElementById("dungLuongSP").value =
