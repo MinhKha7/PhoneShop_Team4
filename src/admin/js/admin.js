@@ -50,7 +50,7 @@ function renderTable(products) {
       undefined,
       elt("td", { className: "text-start" }, product.tenSP),
       elt("td", undefined, product.loaiSP),
-      elt("td", undefined, product.giaSP),
+      elt("td", undefined, Number(product.giaSP).toLocaleString("vi")),
       elt("td", undefined, product.kichThuocSP),
       elt("td", undefined, product.dungLuongSP),
       elt("td", undefined, elt("img", { src: product.hinhSP })),
@@ -85,7 +85,9 @@ function renderTable(products) {
               // Render dữ liệu cũ
               document.getElementById("tenSP").value = product.tenSP;
               document.getElementById("loaiSP").value = product.loaiSP;
-              document.getElementById("giaSP").value = product.giaSP;
+              document.getElementById("giaSP").value = Number(
+                product.giaSP
+              ).toLocaleString("vi");
               document.getElementById("kichThuocSP").value =
                 product.kichThuocSP;
               document.getElementById("dungLuongSP").value =
@@ -218,29 +220,49 @@ document.getElementById("btnTim").addEventListener("click", () => {
 });
 // ===========================
 
-// Tìm kiếm sản phẩm
+// Sắp xếp theo giá sản phẩm
 document.getElementById("giaTitle").addEventListener("click", () => {
   var sapXepTang = document.querySelector("#SapXepTang");
+  const searchProduct = document.getElementById("searchProduct").value;
 
-  if (sapXepTang.style.display === "inline-block") {
-    document.querySelector("#SapXepTang").style.display = "none";
-    document.querySelector("#SapXepGiam").style.display = "inline-block";
-    fetch(`${BASE_URL}?sortBy=giaSP&order=desc`)
+  if (searchProduct !== "") {
+    fetch(`${BASE_URL}?tenSP=${searchProduct}`)
       .then((res) => res.json())
       .then((products) => {
-        renderTable(products);
+        console.log(products);
+        if (sapXepTang.style.display === "inline-block") {
+          document.querySelector("#SapXepTang").style.display = "none";
+          document.querySelector("#SapXepGiam").style.display = "inline-block";
+          products.sort((a, b) => b.giaSP - a.giaSP);
+          renderTable(products);
+        } else {
+          document.querySelector("#SapXepTang").style.display = "inline-block";
+          document.querySelector("#SapXepGiam").style.display = "none";
+          products.sort((a, b) => a.giaSP - b.giaSP);
+          renderTable(products);
+        }
       });
   } else {
-    document.querySelector("#SapXepTang").style.display = "inline-block";
-    document.querySelector("#SapXepGiam").style.display = "none";
-    fetch(`${BASE_URL}?sortBy=giaSP`)
-      .then((res) => res.json())
-      .then((products) => {
-        renderTable(products);
-      });
+    if (sapXepTang.style.display === "inline-block") {
+      document.querySelector("#SapXepTang").style.display = "none";
+      document.querySelector("#SapXepGiam").style.display = "inline-block";
+      fetch(`${BASE_URL}?sortBy=giaSP&order=desc`)
+        .then((res) => res.json())
+        .then((products) => {
+          renderTable(products);
+        });
+    } else {
+      document.querySelector("#SapXepTang").style.display = "inline-block";
+      document.querySelector("#SapXepGiam").style.display = "none";
+      fetch(`${BASE_URL}?sortBy=giaSP`)
+        .then((res) => res.json())
+        .then((products) => {
+          renderTable(products);
+        });
+    }
   }
 });
-// ===========================
+// ===================================================
 
 // ===================== Validate =====================
 

@@ -2,6 +2,9 @@ import { elt } from "./ulti.js";
 let body = document.querySelector("body");
 
 function header() {
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  let renderNum = `${cart == undefined ? 0 : cart.length}`;
+
   return elt(
     "header",
     undefined,
@@ -68,7 +71,7 @@ function header() {
                 });
               },
             }),
-            elt("div", { className: "num-Cart" }, 0)
+            elt("div", { className: "num-Cart" }, renderNum)
           )
         )
       ),
@@ -198,7 +201,7 @@ function header() {
             elt("i", {
               className: "fa-solid fa-cart-shopping",
             }),
-            elt("div", { className: "num-CartMB" }, 0)
+            elt("div", { className: "num-CartMB" }, renderNum)
           )
         )
       )
@@ -230,30 +233,28 @@ function footer() {
         elt(
           "div",
           { className: "footer-box__item" },
-          elt("h4", undefined, "Clover Phone"),
+          elt(
+            "h4",
+            undefined,
+            elt(
+              "i",
+              { className: "fa-solid fa-clover me-4" },
+              elt("span", undefined, " Clover Phone")
+            )
+          ),
           elt(
             "p",
             undefined,
-            elt("span", undefined, "Địa chỉ:"),
+            elt("span", undefined, "Địa chỉ: "),
             "lorem is asdasdasdasd"
           ),
 
+          elt("p", undefined, elt("span", undefined, "SĐT: "), "0334491121"),
+          elt("p", undefined, elt("span", undefined, "SĐT2: "), "0334491191"),
           elt(
             "p",
             undefined,
-            elt("span", undefined, "SĐT:"),
-            "0334491121"
-          ),
-          elt(
-            "p",
-            undefined,
-            elt("span", undefined, "SĐT2:"),
-            "0334491191"
-          ),
-          elt(
-            "p",
-            undefined,
-            elt("span", undefined, "email:"),
+            elt("span", undefined, "email: "),
             "admin123@gmail.com"
           )
         ),
@@ -605,10 +606,9 @@ const tongTotal = () => {
       ),
       elt(
         "button",
-        { className: "btn btn-primary",onclick:()=>xoaAllCart()},
+        { className: "btn btn-primary", onclick: () => xoaAllCart() },
         "Xoá Tất Cả"
-      ),
-
+      )
     )
   );
 
