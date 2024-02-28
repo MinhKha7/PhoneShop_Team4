@@ -10,6 +10,7 @@ function renderProduct() {
   fetch(`${BASE_URL}`)
     .then((res) => res.json())
     .then((products) => {
+      products.sort((a, b) => b.id - a.id);
       renderTable(products);
     });
 }
@@ -160,11 +161,11 @@ document.querySelector(".modal-footer").append(
           })
             .then((res) => res.json())
             .then(() => {
-              alert("success");
+              alert("Cập nhật thành công");
               renderProduct();
             })
             .catch(() => {
-              alert("fail");
+              alert("Cập nhật thất bại");
             })
             .finally(() => {
               modal.querySelector(".btn-close").click();
@@ -189,11 +190,11 @@ document.querySelector(".modal-footer").append(
           })
             .then((res) => res.json())
             .then(() => {
-              alert("success");
+              alert("Thêm mới thành công");
               renderProduct();
             })
             .catch(() => {
-              alert("fail");
+              alert("Thêm mới thất bại");
             })
             .finally(() => {
               modal.querySelector(".btn-close").click();
@@ -213,6 +214,7 @@ document.getElementById("btnTim").addEventListener("click", () => {
   fetch(`${BASE_URL}?tenSP=${searchProduct}`)
     .then((res) => res.json())
     .then((products) => {
+      products.sort((a, b) => b.id - a.id);
       renderTable(products);
     });
 });
@@ -406,6 +408,7 @@ function isValid() {
 }
 // TH3: Xét lỗi lúc chỉnh sửa (đã nhập đầy đủ nên không xét kiểu TH1)
 function isValidForUpdate() {
+  setTouches(true);
   var isTouch = Object.values(touches).every(function (item) {
     return item;
   });
@@ -413,7 +416,6 @@ function isValidForUpdate() {
   var isTrue = Object.values(errors).every(function (item) {
     return item.length === 0;
   });
-
   return isTouch && isTrue;
 }
 // ==================================================================
